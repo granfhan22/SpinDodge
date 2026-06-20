@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Spin Attack - Main Menu</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="menu-screen">
+  <h1 class="title">Spin Attack</h1>
+
+  <div class="menu-buttons" id="menuButtons">
+    <div class="menu-item" data-target="gameplay.html">
+      <span class="selector-star">&#10022;</span>
+      <button class="btn btn-primary">Lets Spin</button>
+    </div>
+    <div class="menu-item" data-target="">
+      <span class="selector-star">&#10022;</span>
+      <button class="btn btn-primary">Quit</button>
+    </div>
+  </div>
+
+  <p class="hint">&uarr; / &darr; de chon &middot; Enter hoac click de xac nhan</p>
+
+  <script src="transition.js"></script>
+  <script>
+    const items = Array.from(document.querySelectorAll('.menu-item'));
+    let selected = 0;
+
+    function render() {
+      items.forEach((item, i) => item.classList.toggle('selected', i === selected));
+    }
+    render();
+
+    function activate(item) {
+      item.querySelector('.selector-star').classList.add('rolling');
+      const target = item.dataset.target;
+      if (target) {
+        spinTransition(target);
+      } else {
+        spinTransition(null, () => alert('Da thoat game (demo)'));
+      }
+    }
+
+    items.forEach((item, i) => {
+      item.addEventListener('mouseenter', () => { selected = i; render(); });
+      item.addEventListener('click', () => {
+        selected = i;
+        render();
+        activate(item);
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown') { selected = (selected + 1) % items.length; render(); }
+      if (e.key === 'ArrowUp') { selected = (selected - 1 + items.length) % items.length; render(); }
+      if (e.key === 'Enter') { activate(items[selected]); }
+    });
+  </script>
+</body>
+</html>

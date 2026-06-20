@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Spin Attack - Result</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="lose-screen">
+  <div class="play-area dim">
+    <p class="placeholder-label">Main GamePlay</p>
+  </div>
+
+  <div class="result-modal">
+    <p class="result-mode" id="resultMode">Ban da thua</p>
+    <p class="result-title">You was spin for<br><span id="resultTime">0s</span></p>
+    <div class="result-buttons">
+      <button class="btn btn-primary" id="tryAgainBtn">Try Again</button>
+      <button class="btn btn-primary" id="homeBtn">Home</button>
+    </div>
+  </div>
+
+  <script src="transition.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const seconds = params.get('seconds') || '0';
+    const mode = params.get('mode') || 'lose';
+
+    document.getElementById('resultTime').textContent = seconds + 's';
+    document.getElementById('resultMode').textContent = mode === 'pause' ? 'Tam dung' : 'Ban da thua';
+
+    document.getElementById('tryAgainBtn').addEventListener('click', () => {
+      spinTransition('gameplay.html');
+    });
+    document.getElementById('homeBtn').addEventListener('click', () => {
+      spinTransition('main-menu.html');
+    });
+  </script>
+</body>
+</html>

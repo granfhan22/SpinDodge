@@ -1,0 +1,166 @@
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+  color: #222;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  background: #ffb3b3;
+  transition: background .15s, transform .1s;
+}
+.btn:hover { background: #ff9a9a; }
+.btn:active { transform: scale(.97); }
+
+/* ---------- Main Menu ---------- */
+.menu-screen { align-items: center; padding-top: 60px; }
+.title { font-size: 2.4rem; margin: 0; }
+.menu-buttons { display: flex; flex-direction: column; gap: 30px; margin-top: 70px; }
+.menu-item { display: flex; align-items: center; gap: 14px; cursor: pointer; }
+.selector-star {
+  font-size: 1.6rem;
+  color: #7a4ddb;
+  opacity: 0;
+  display: inline-block;
+  width: 1.2em;
+  text-align: center;
+  transition: opacity .15s;
+}
+.menu-item.selected .selector-star { opacity: 1; }
+.selector-star.rolling { animation: star-roll .35s ease-in; }
+@keyframes star-roll {
+  0%   { transform: translateX(0) rotate(0deg); }
+  100% { transform: translateX(14px) rotate(360deg); }
+}
+.menu-item .btn { width: 260px; font-size: 1.3rem; text-align: center; }
+.hint { color: #888; font-size: .9rem; margin-top: 26px; }
+
+/* ---------- Gameplay ---------- */
+.gameplay-screen { padding: 16px 24px; }
+.hud-top { position: relative; display: flex; align-items: center; justify-content: space-between; }
+.hp-row { display: flex; gap: 6px; font-size: 1.6rem; }
+.heart { transition: opacity .2s; }
+.heart.lost { opacity: .2; }
+.score-timer {
+  font-size: 1.2rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.btn-pause {
+  background: #eee;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1rem;
+  padding: 0;
+}
+.play-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+}
+.placeholder-label { font-size: 1.6rem; color: #333; }
+.spin-top-demo {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ff8c8c, #b32d2d);
+  animation: demo-spin 1.2s linear infinite;
+}
+@keyframes demo-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.corner-hint { position: absolute; bottom: 12px; left: 16px; color: #aaa; font-size: .85rem; margin: 0; }
+
+/* ---------- Pause/Lose panel overlay on top of the running scene ---------- */
+.result-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, .15);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+  z-index: 500;
+}
+.result-overlay.visible { opacity: 1; pointer-events: auto; }
+.result-overlay .result-modal {
+  transform: scale(.85);
+  transition: transform .25s ease;
+}
+.result-overlay.visible .result-modal { transform: scale(1); }
+
+/* ---------- Lose / Pause result screen (standalone preview page) ---------- */
+.lose-screen { align-items: center; justify-content: center; }
+.lose-screen .play-area.dim {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+  filter: brightness(.96);
+  z-index: 0;
+}
+.result-modal {
+  position: relative;
+  z-index: 1;
+  background: #e0e0e0;
+  padding: 40px 56px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0,0,0,.15);
+}
+.result-mode { margin: 0 0 10px; color: #888; font-size: .85rem; letter-spacing: .05em; text-transform: uppercase; }
+.result-title { font-size: 1.6rem; line-height: 1.4; margin: 0 0 24px; }
+.result-buttons { display: flex; gap: 20px; justify-content: center; }
+.result-buttons .btn { width: 160px; }
+
+/* ---------- Shared screen-transition: a giant spinning top rolls across ---------- */
+.spin-transition-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+.spin-transition-top {
+  position: absolute;
+  top: 50%;
+  left: -130vmax;
+  width: 140vmax;
+  height: 140vmax;
+  margin-top: -70vmax;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ff8c8c, #b32d2d);
+  box-shadow: 0 10px 30px rgba(0,0,0,.3);
+  animation-name: spin-roll;
+  animation-timing-function: cubic-bezier(.3,0,.7,1);
+  animation-fill-mode: forwards;
+}
+@keyframes spin-roll {
+  0%   { left: -130vmax; transform: rotate(0deg); }
+  100% { left: 130vmax;  transform: rotate(1080deg); }
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Spin Attack - Gameplay</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="gameplay-screen">
+  <div class="hud-top">
+    <div class="hp-row" id="hpRow">
+      <span class="heart">&#9825;</span>
+      <span class="heart">&#9825;</span>
+      <span class="heart">&#9825;</span>
+    </div>
+    <div class="score-timer">Score: <span id="score">0</span>&nbsp;&bull;&nbsp;<span id="timer">00:00</span></div>
+    <button class="btn btn-pause" id="pauseBtn" title="Pause">&#10074;&#10074;</button>
+  </div>
+
+  <div class="play-area">
+    <div class="spin-top-demo"></div>
+    <p class="placeholder-label">Main GamePlay</p>
+  </div>
+
+  <p class="corner-hint">Demo: nhan phim "H" de mat 1 HP</p>
+
+  <!-- Pause/Lose panel: overlays on top of the still-running scene, no
+       scene-change roll here - the roll only plays when a button below
+       actually leaves this scene (Try Again / Home). -->
+  <div class="result-overlay" id="resultOverlay">
+    <div class="result-modal">
+      <p class="result-mode" id="resultMode">Tam dung</p>
+      <p class="result-title">You was spin for<br><span id="resultTime">0s</span></p>
+      <div class="result-buttons">
+        <button class="btn btn-primary" id="tryAgainBtn">Try Again</button>
+        <button class="btn btn-primary" id="homeBtn">Home</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="transition.js"></script>
+  <script>
+    // Demo timer/score so the screen doesn't look static.
+    let seconds = 0, score = 0, ended = false;
+    const timerInterval = setInterval(() => {
+      seconds++;
+      score += Math.floor(Math.random() * 5);
+      const m = String(Math.floor(seconds / 60)).padStart(2, '0');
+      const s = String(seconds % 60).padStart(2, '0');
+      document.getElementById('timer').textContent = `${m}:${s}`;
+      document.getElementById('score').textContent = score;
+    }, 1000);
+
+    function showResultPanel(mode) {
+      if (ended) return;
+      ended = true;
+      clearInterval(timerInterval);
+      document.getElementById('resultMode').textContent = mode === 'pause' ? 'Tam dung' : 'Ban da thua';
+      document.getElementById('resultTime').textContent = seconds + 's';
+      document.getElementById('resultOverlay').classList.add('visible');
+    }
+
+    // Demo: pressing H removes a heart to preview the HP / lose flow.
+    const hearts = Array.from(document.querySelectorAll('.heart'));
+    let hp = hearts.length;
+    document.addEventListener('keydown', (e) => {
+      if (!ended && e.key.toLowerCase() === 'h' && hp > 0) {
+        hp--;
+        hearts[hp].classList.add('lost');
+        if (hp === 0) showResultPanel('lose');
+      }
+    });
+
+    document.getElementById('pauseBtn').addEventListener('click', () => showResultPanel('pause'));
+
+    // Leaving the panel is an actual scene change, so it keeps the giant
+    // rolling-top transition.
+    document.getElementById('tryAgainBtn').addEventListener('click', () => {
+      spinTransition('gameplay.html');
+    });
+    document.getElementById('homeBtn').addEventListener('click', () => {
+      spinTransition('main-menu.html');
+    });
+  </script>
+</body>
+</html>
