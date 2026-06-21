@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "PowerShell(Start-Process \"G:\\\\unity\\\\anima\\\\SpinPrototype\\\\Mockup\\\\gameplay.html\")"
-    ]
-  }
-}
