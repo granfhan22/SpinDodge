@@ -24,5 +24,20 @@ public class Bullet : MonoBehaviour
         gameObject.SetActive(false);
     } // Kiểm tra nếu object ra khỏi màn hình sẽ tự động trả về Pool.
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            gameObject.SetActive(false);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Bounder"))
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
 
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 
 public class Spin : MonoBehaviour
@@ -23,16 +24,17 @@ public class Spin : MonoBehaviour
     public float skillCooldown;
     public float fadeAmount ;
 
-    [Header("Visual")]
-    public Transform visual;
-    public SpriteRenderer visualRenderer;
-
     [Header("Health")]
     public int maxHealth ;
+    public Slider HealthSlider;
 
     [Header("Screen Shake")]
     public float shakeDuration = 0.2f;
     public float shakeMagnitude = 0.3f;
+
+    [Header("Death")]
+    public float deathShakeDuration = 0.6f;
+    public float deathShakeMagnitude = 0.6f;
 
     protected Vector2 direction = Vector2.right; 
     protected float speedRatio;
@@ -50,12 +52,13 @@ public class Spin : MonoBehaviour
     protected bool isDead;
     Vector3 cameraBasePos;
     Coroutine shakeCoroutine;
+    SpriteRenderer visualRenderer;
 
     protected virtual void Awake()
     {
-        if (visual == null) visual = transform;
-        if (visualRenderer == null) visualRenderer = visual.GetComponentInChildren<SpriteRenderer>();
-
+        visualRenderer = GetComponent<SpriteRenderer>();
+        
+        
         if (visualRenderer != null)
         {
             originalColor = visualRenderer.color;
@@ -64,6 +67,8 @@ public class Spin : MonoBehaviour
         }
 
         currentHealth = maxHealth;
+        HealthSlider.maxValue = maxHealth;
+        HealthSlider.value = currentHealth;
         if (Camera.main != null) cameraBasePos = Camera.main.transform.localPosition;
     }
 
@@ -132,7 +137,7 @@ public class Spin : MonoBehaviour
     void ApplySpin()
     {
         float spinSpeed = Mathf.Lerp(minSpinSpeed, maxSpinSpeed, speedRatio);
-        visual.RotateAround(transform.position, Vector3.forward, spinSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.forward, spinSpeed * Time.deltaTime);
     }
 
     // Skill button
@@ -204,29 +209,45 @@ public class Spin : MonoBehaviour
         currentHealth = Mathf.Max(0, currentHealth - amount);
 
         if (shakeCoroutine != null) StopCoroutine(shakeCoroutine);
-        shakeCoroutine = StartCoroutine(ScreenShake());
+        shakeCoroutine = StartCoroutine(ScreenShake(shakeDuration, shakeMagnitude));
+        HealthSlider.value = currentHealth;
 
         if (currentHealth <= 0) Die();
     }
 
-    // Override in child classes for death effects/animations; this default
-    // just stops the object from doing anything else.
+    // Override in child classes for death effects/animations.
+    // Keeps the GameObject active (instead of SetActive(false)) so the
+    // death shake coroutine below can keep running while the sprite is hidden.
     protected virtual void Die()
     {
         isDead = true;
         dashing = false;
-        gameObject.SetActive(false);
+
+        if (shakeCoroutine != null) StopCoroutine(shakeCoroutine);
+        shakeCoroutine = StartCoroutine(DeathSequence());
     }
 
-    IEnumerator ScreenShake()
+    IEnumerator DeathSequence()
+    {
+        if (visualRenderer != null) visualRenderer.enabled = false;
+
+        Collider2D col = GetComponent<Collider2D>();
+        if (col != null) col.enabled = false;
+
+        yield return StartCoroutine(ScreenShake(deathShakeDuration, deathShakeMagnitude));
+
+        if (GameManage.Instance != null) GameManage.Instance.ShowLoseScreen();
+    }
+
+    IEnumerator ScreenShake(float duration, float magnitude)
     {
         if (Camera.main == null) yield break;
         Transform cam = Camera.main.transform;
 
         float elapsed = 0f;
-        while (elapsed < shakeDuration)
+        while (elapsed < duration)
         {
-            Vector2 offset = Random.insideUnitCircle * shakeMagnitude;
+            Vector2 offset = Random.insideUnitCircle * magnitude;
             cam.localPosition = cameraBasePos + new Vector3(offset.x, offset.y, 0f);
             elapsed += Time.deltaTime;
             yield return null;
