@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5129113328127874654
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6582750275816891526}
+  - component: {fileID: 1052676743592855040}
+  m_Layer: 0
+  m_Name: BoxDropEvent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6582750275816891526
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5129113328127874654}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.51849, y: 2.0882, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1052676743592855040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5129113328127874654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d2f0759e3128e74b82bc1827606937e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BoxDropEvent
+  shadowPrefab: {fileID: 1123611802049658419, guid: 8756a35c262f7da4384fc4536eb53348, type: 3}
+  boxPrefab: {fileID: 6337821348512905338, guid: a54e551e0f8a2394fbe867ea92ee911c, type: 3}
+  player: {fileID: 0}
+  warningDuration: 3
+  boxLifetime: 1
+  damageRadius: 1.5
+  damageAmount: 1
+  shakeDuration: 0.25
+  shakeMagnitude: 0.4

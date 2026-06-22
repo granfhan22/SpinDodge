@@ -148,6 +148,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 863484855}
   - {fileID: 1034156704}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -971,6 +972,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.3644495, y: 10.345657}
   m_EdgeRadius: 0
+--- !u!4 &863484855 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5453190505097189488, guid: f96f405d001e38e47bc4b0a322b38d5d, type: 3}
+  m_PrefabInstance: {fileID: 5475778474294922735}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &863484856 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4456626813868090949, guid: f96f405d001e38e47bc4b0a322b38d5d, type: 3}
+  m_PrefabInstance: {fileID: 5475778474294922735}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d2f0759e3128e74b82bc1827606937e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BoxDropEvent
 --- !u!1 &903853044
 GameObject:
   m_ObjectHideFlags: 0
@@ -1570,6 +1587,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EventManager
   events:
+  - {fileID: 863484856}
   - {fileID: 1034156705}
   intervalSeconds: 5
 --- !u!4 &1295577115
@@ -2088,20 +2106,22 @@ MonoBehaviour:
   maxSpinSpeed: 720
   minMoveSpeed: 0
   maxMoveSpeed: 5
-  acceleration: 8
-  deceleration: 2
-  reverseThreshold: 2
+  acceleration: 2.5
+  deceleration: 3
+  reverseThreshold: 0.15
   idleDeceleration: 2
   dashSpeed: 10
-  dashDuration: 3
+  dashDuration: 0.25
   skillCooldown: 5
-  fadeAmount: 5
+  fadeAmount: 0.6
   maxHealth: 5
   HealthSlider: {fileID: 1395063437}
   shakeDuration: 0.2
   shakeMagnitude: 0.3
   deathShakeDuration: 0.6
-  deathShakeMagnitude: 0.6
+  deathShakeMagnitude: 1
+  invincibilityDuration: 2
+  invincibilityBlinkInterval: 0.1
 --- !u!1 &1674976331
 GameObject:
   m_ObjectHideFlags: 0
@@ -2480,6 +2500,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &5475778474294922735
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 47608033}
+    m_Modifications:
+    - target: {fileID: 4456626813868090949, guid: f96f405d001e38e47bc4b0a322b38d5d, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1627248833}
+    - target: {fileID: 5453190505097189488, guid: f96f405d001e38e47bc4b0a322b38d5d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -957.48145
+      objectReference: {fileID: 0}
+    - target: {fileID: 5453190505097189488, guid: f96f405d001e38e47bc4b0a322b38d5d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -537.91187
+      objectReference: {fileID: 0}
+    - target: {fileID: 5453190505097189488, guid: f96f405d001e38e47bc4b0a322b38d5d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5453190505097189488, guid: f96f405d001e38e47bc4b0a322b38d5d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5453190505097189488, guid: f96f405d001e38e47bc4b0a322b38d5d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5453190505097189488, guid: f96f405d001e38e47bc4b0a322b38d5d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5453190505097189488, guid: f96f405d001e38e47bc4b0a322b38d5d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5453190505097189488, guid: f96f405d001e38e47bc4b0a322b38d5d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5453190505097189488, guid: f96f405d001e38e47bc4b0a322b38d5d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5453190505097189488, guid: f96f405d001e38e47bc4b0a322b38d5d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043403037016149075, guid: f96f405d001e38e47bc4b0a322b38d5d, type: 3}
+      propertyPath: m_Name
+      value: BoxDropEvent
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f96f405d001e38e47bc4b0a322b38d5d, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
