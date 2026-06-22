@@ -1432,7 +1432,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1240226813
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1451,7 +1451,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 14.650818}
+  m_AnchoredPosition: {x: 0, y: 14.650879}
   m_SizeDelta: {x: -900, y: -465.5665}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1240226814
@@ -1518,8 +1518,8 @@ RectTransform:
   m_GameObject: {fileID: 1395063435}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.84, y: 1.84, z: 1.84}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 487446826}
   - {fileID: 1427494537}
@@ -1527,7 +1527,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -739.8, y: 474.6}
+  m_AnchoredPosition: {x: -539, y: 445}
   m_SizeDelta: {x: 400, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1395063437
@@ -1769,7 +1769,7 @@ GameObject:
   - component: {fileID: 1627248835}
   - component: {fileID: 1627248837}
   m_Layer: 0
-  m_Name: Triangle
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1824,7 +1824,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 5393604723899787391, guid: 209d423e497d1f6499ded65bd263f542, type: 3}
+  m_Sprite: {fileID: 1330588204551960968, guid: cb18d5059500ea043a21c7b979ebc7a1, type: 3}
   m_Color: {r: 1, g: 0.9792453, b: 0.9792453, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1843,7 +1843,7 @@ Transform:
   m_GameObject: {fileID: 1627248831}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.62, y: 0.305, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2244,7 +2244,7 @@ GameObject:
   - component: {fileID: 1819646090}
   m_Layer: 0
   m_Name: Bounder
-  m_TagString: Untagged
+  m_TagString: Bounder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
