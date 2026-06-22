@@ -36,6 +36,10 @@ public class Spin : MonoBehaviour
     public float deathShakeDuration = 0.6f;
     public float deathShakeMagnitude = 0.6f;
 
+    [Header("Invincibility")]
+    public float invincibilityDuration = 2f;
+    public float invincibilityBlinkInterval = 0.1f;
+
     protected Vector2 direction = Vector2.right; 
     protected float speedRatio;
 
@@ -50,15 +54,19 @@ public class Spin : MonoBehaviour
 
     protected int currentHealth;
     protected bool isDead;
+    protected bool isInvincible;
     Vector3 cameraBasePos;
     Coroutine shakeCoroutine;
+    Coroutine invincibilityCoroutine;
     SpriteRenderer visualRenderer;
+    Collider2D playerCollider;
 
     protected virtual void Awake()
     {
         visualRenderer = GetComponent<SpriteRenderer>();
-        
-        
+        playerCollider = GetComponent<Collider2D>();
+
+
         if (visualRenderer != null)
         {
             originalColor = visualRenderer.color;
@@ -204,7 +212,7 @@ public class Spin : MonoBehaviour
 
     protected virtual void TakeDamage(int amount = 1)
     {
-        if (isDead) return;
+        if (isDead || isInvincible) return;
 
         currentHealth = Mathf.Max(0, currentHealth - amount);
 
@@ -212,12 +220,37 @@ public class Spin : MonoBehaviour
         shakeCoroutine = StartCoroutine(ScreenShake(shakeDuration, shakeMagnitude));
         HealthSlider.value = currentHealth;
 
-        if (currentHealth <= 0) Die();
+        if (currentHealth <= 0)
+        {
+            Die();
+            return;
+        }
+
+        if (invincibilityCoroutine != null) StopCoroutine(invincibilityCoroutine);
+        invincibilityCoroutine = StartCoroutine(InvincibilityRoutine());
     }
 
-    // Override in child classes for death effects/animations.
-    // Keeps the GameObject active (instead of SetActive(false)) so the
-    // death shake coroutine below can keep running while the sprite is hidden.
+    // Invicible when take damage
+    IEnumerator InvincibilityRoutine()
+    {
+        isInvincible = true;
+        if (playerCollider != null) playerCollider.enabled = false;
+
+        float elapsed = 0f;
+        while (elapsed < invincibilityDuration)
+        {
+            if (visualRenderer != null) visualRenderer.enabled = !visualRenderer.enabled;
+            yield return new WaitForSeconds(invincibilityBlinkInterval);
+            elapsed += invincibilityBlinkInterval;
+        }
+
+        if (visualRenderer != null) visualRenderer.enabled = true;
+        if (playerCollider != null) playerCollider.enabled = true;
+        isInvincible = false;
+        invincibilityCoroutine = null;
+    }
+
+    //what happen when u ded;
     protected virtual void Die()
     {
         isDead = true;
