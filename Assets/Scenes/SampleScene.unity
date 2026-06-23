@@ -685,7 +685,7 @@ GameObject:
   - component: {fileID: 710444628}
   m_Layer: 0
   m_Name: Top
-  m_TagString: Untagged
+  m_TagString: Bounder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1009,7 +1009,7 @@ GameObject:
   - component: {fileID: 855225952}
   m_Layer: 0
   m_Name: Left
-  m_TagString: Untagged
+  m_TagString: Bounder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1700,7 +1700,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1240226813
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2012,7 +2012,7 @@ GameObject:
   - component: {fileID: 1627248835}
   - component: {fileID: 1627248837}
   - component: {fileID: 1627248838}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2176,7 +2176,7 @@ MonoBehaviour:
   deceleration: 2
   reverseThreshold: 2
   idleDeceleration: 2
-  dashSpeed: 10
+  dashSpeed: 5
   dashDuration: 3
   skillCooldown: 5
   fadeAmount: 5
@@ -2302,7 +2302,7 @@ GameObject:
   - component: {fileID: 1715224419}
   m_Layer: 0
   m_Name: Right
-  m_TagString: Untagged
+  m_TagString: Bounder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2408,7 +2408,7 @@ GameObject:
   - component: {fileID: 1781135952}
   m_Layer: 0
   m_Name: Bottom
-  m_TagString: Untagged
+  m_TagString: Bounder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -1,7 +1,6 @@
 using UnityEngine;
 
 // "Ê ke" bay thẳng theo hướng đã được báo trước (warning), vừa bay vừa xoay quanh trục Z.
-// Collider trên object này phải gắn tag "Bullet" để tái dùng logic TakeDamage của Spin.
 public class EkeProjectile : MonoBehaviour
 {
     private Vector2 direction;
@@ -24,5 +23,15 @@ public class EkeProjectile : MonoBehaviour
     private void OnBecameInvisible()
     {
         Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Spin playerSpin = collision.gameObject.GetComponent<Spin>();
+            if (playerSpin != null) playerSpin.ApplyDamage();
+            Destroy(gameObject);
+        }
     }
 }

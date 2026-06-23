@@ -25,21 +25,19 @@ public class Bullet : MonoBehaviour
     private void OnBecameInvisible()
     {
         gameObject.SetActive(false);
-    } 
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Spin playerSpin = collision.gameObject.GetComponent<Spin>();
+            if (playerSpin != null) playerSpin.ApplyDamage();
+            gameObject.SetActive(false);
+        }
+        else if (collision.gameObject.CompareTag("Bounder"))
         {
             gameObject.SetActive(false);
         }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if(collision.gameObject.CompareTag("Bounder"))
-        {
-            gameObject.SetActive(false);
-        }
-        
     }
 }

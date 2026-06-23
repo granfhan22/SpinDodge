@@ -59,13 +59,12 @@ public class Spin : MonoBehaviour
     Coroutine shakeCoroutine;
     Coroutine invincibilityCoroutine;
     SpriteRenderer visualRenderer;
-    Collider2D playerCollider;
+    int bulletLayer;
 
     protected virtual void Awake()
     {
         visualRenderer = GetComponent<SpriteRenderer>();
-        playerCollider = GetComponent<Collider2D>();
-
+        bulletLayer = LayerMask.NameToLayer("Bullet");
 
         if (visualRenderer != null)
         {
@@ -199,18 +198,7 @@ public class Spin : MonoBehaviour
         dashTimer -= Time.deltaTime;
         if (dashTimer <= 0f) dashing = false;
     }
-    //Take Dame will get camera shake
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Bullet")) TakeDamage();
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Bullet")) TakeDamage();
-    }
-
-    // Cho phép các GameEvent ngoài (vd. BoxDropEvent) gây dame lên player theo phạm vi/vị trí.
+    // Cho phép đạn/event ngoài (Bullet, EkeProjectile, BoxDropEvent...) gây dame lên player.
     public void ApplyDamage(int amount = 1) => TakeDamage(amount);
 
     protected virtual void TakeDamage(int amount = 1)
@@ -233,11 +221,11 @@ public class Spin : MonoBehaviour
         invincibilityCoroutine = StartCoroutine(InvincibilityRoutine());
     }
 
-    // Invicible when take damage
+
     IEnumerator InvincibilityRoutine()
     {
         isInvincible = true;
-        if (playerCollider != null) playerCollider.enabled = false;
+        if (bulletLayer >= 0) Physics2D.IgnoreLayerCollision(gameObject.layer, bulletLayer, true);
 
         float elapsed = 0f;
         while (elapsed < invincibilityDuration)
@@ -248,7 +236,7 @@ public class Spin : MonoBehaviour
         }
 
         if (visualRenderer != null) visualRenderer.enabled = true;
-        if (playerCollider != null) playerCollider.enabled = true;
+        if (bulletLayer >= 0) Physics2D.IgnoreLayerCollision(gameObject.layer, bulletLayer, false);
         isInvincible = false;
         invincibilityCoroutine = null;
     }
