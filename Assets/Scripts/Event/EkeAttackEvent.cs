@@ -1,11 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-// Event kiểu "No Humanity": báo trước bằng WarningIndicator (2 vạch đỏ nhấp nháy),
-// sau warningDuration giây thì spawn ê ke bay theo đúng hướng đã báo, vừa bay vừa xoay.
+
 public class EkeAttackEvent : GameEvent
 {
-    [SerializeField] private GameObject warningPrefab;
+    [SerializeField] private GameObject warningPrefab; // for 2 warning indicator ( 2 red line mb)
     [SerializeField] private GameObject ekePrefab;
     [SerializeField] private Transform player;
 

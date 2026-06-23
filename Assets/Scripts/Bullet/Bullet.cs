@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
     private void OnBecameInvisible()
     {
         gameObject.SetActive(false);
-    } // Kiểm tra nếu object ra khỏi màn hình sẽ tự động trả về Pool.
+    } 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

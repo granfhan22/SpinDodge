@@ -27,7 +27,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    // Chọn event ngẫu nhiên, không trùng với event vừa chạy lần trước (nếu có nhiều hơn 1 event).
+    //random event no same on a row
     private int PickNextEventIndex()
     {
         if (events == null || events.Length == 0) return -1;

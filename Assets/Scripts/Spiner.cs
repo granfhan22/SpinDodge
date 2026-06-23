@@ -210,6 +210,9 @@ public class Spin : MonoBehaviour
         if (collision.collider.CompareTag("Bullet")) TakeDamage();
     }
 
+    // Cho phép các GameEvent ngoài (vd. BoxDropEvent) gây dame lên player theo phạm vi/vị trí.
+    public void ApplyDamage(int amount = 1) => TakeDamage(amount);
+
     protected virtual void TakeDamage(int amount = 1)
     {
         if (isDead || isInvincible) return;
