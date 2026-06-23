@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5147017632758873531}
   m_Layer: 0
   m_Name: Box
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,8 +81,8 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: -1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0.8329999, b: 0, a: 1}
+  m_Sprite: {fileID: -2608732192183298087, guid: 89b2910cb4e22944aaa738b7052b4973, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

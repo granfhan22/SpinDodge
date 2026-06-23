@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 9fb195bcf6df9d844942e349c1612383
+guid: 89b2910cb4e22944aaa738b7052b4973
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1105907384396435247
-    second: "Bo\xF4ksAndShadow_0"
+      213: 2353571312451627304
+    second: Book_0
   - first:
-      213: -6360624424881756056
-    second: "Bo\xF4ksAndShadow_1"
+      213: -2608732192183298087
+    second: Book_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -54,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 800
+  spritePixelsToUnits: 600
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "Bo\xF4ksAndShadow_0"
+      name: Book_0
       rect:
         serializedVersion: 2
-        x: 22
-        y: 63
-        width: 963
-        height: 945
+        x: 190
+        y: 161
+        width: 626
+        height: 749
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1d0b19ed71707a0f0800000000000000
-      internalID: -1105907384396435247
+      spriteID: 829aa3093a099a020800000000000000
+      internalID: 2353571312451627304
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Bo\xF4ksAndShadow_1"
+      name: Book_1
       rect:
         serializedVersion: 2
-        x: 968
-        y: 85
-        width: 952
-        height: 910
+        x: 1130
+        y: 174
+        width: 629
+        height: 732
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 868ef3d19c58ab7a0800000000000000
-      internalID: -6360624424881756056
+      spriteID: 9d7d9c294ebebcbd0800000000000000
+      internalID: -2608732192183298087
       vertices: []
       indices: 
       edges: []
@@ -173,8 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "Bo\xF4ksAndShadow_0": -1105907384396435247
-      "Bo\xF4ksAndShadow_1": -6360624424881756056
+      Book_0: 2353571312451627304
+      Book_1: -2608732192183298087
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
