@@ -1,10 +1,10 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnBullet : MonoBehaviour
 {
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private Transform playerPosition;
+    [SerializeField] private Transform playerPosition; 
     [Header("Camera bound property")]
     [SerializeField] private float topBound, bottomBound, leftBound, rightBound;
 
