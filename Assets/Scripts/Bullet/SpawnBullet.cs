@@ -9,7 +9,7 @@ public class SpawnBullet : MonoBehaviour
     [SerializeField] private float topBound, bottomBound, leftBound, rightBound;
 
     [Header("Batch settings")]
-    [SerializeField] private int batchSize = 10;
+    [SerializeField] private int batchSize = 20; // Change to 20 prefab spawn 
     [SerializeField] private float spawnIntervalSeconds = 3f;
 
     [Header("Bounder safety")]
@@ -17,7 +17,7 @@ public class SpawnBullet : MonoBehaviour
 
     private void Start()
     {
-
+        
 
         Camera cam = Camera.main;
         if (cam == null)
