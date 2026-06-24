@@ -10,7 +10,7 @@ public class SpawnBullet : MonoBehaviour
 
     [Header("Batch settings")]
     [SerializeField] private int batchSize = 20; // Change to 20 prefab spawn 
-    [SerializeField] private float spawnIntervalSeconds = 3f;
+    [SerializeField] private float spawnIntervalSeconds = 2f; // Đổi sang 2s cho nhanh
 
     [Header("Bounder safety")]
     [SerializeField] private float spawnMargin = 0.4f;
