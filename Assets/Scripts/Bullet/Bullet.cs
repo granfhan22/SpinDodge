@@ -26,7 +26,18 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+<<<<<<< Updated upstream
         if(collision.gameObject.CompareTag("Player"))
+=======
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Spin playerSpin = collision.gameObject.GetComponent<Spin>();
+            if (playerSpin != null) playerSpin.ApplyDamage();
+            AudioManager.Instance?.PlayBulletHit();
+            gameObject.SetActive(false);
+        }
+        else if (collision.gameObject.CompareTag("Bounder"))
+>>>>>>> Stashed changes
         {
             gameObject.SetActive(false);
         }
