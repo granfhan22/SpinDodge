@@ -33,6 +33,7 @@ public class BoxDropEvent : GameEvent
         GameObject boxObj = Instantiate(boxPrefab, spawnPos, Quaternion.identity);
         BoxImpact impact = boxObj.GetComponent<BoxImpact>();
         if (impact != null) impact.Initialize(damageAmount);
+        AudioManager.Instance?.PlayBoxImpact();
         Destroy(boxObj, boxLifetime);
 
         StartCoroutine(ScreenShake(shakeDuration, shakeMagnitude));

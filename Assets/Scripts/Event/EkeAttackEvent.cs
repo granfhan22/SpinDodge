@@ -23,12 +23,14 @@ public class EkeAttackEvent : GameEvent
         GameObject warningObj = Instantiate(warningPrefab);
         WarningIndicator warning = warningObj.GetComponent<WarningIndicator>();
         warning.Setup(spawnPos, direction);
+        AudioManager.Instance?.PlayEkeWarning();
 
         yield return new WaitForSeconds(warningDuration);
 
         Destroy(warningObj);
 
-        GameObject ekeObj = Instantiate(ekePrefab, spawnPos, Quaternion.identity);
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        GameObject ekeObj = Instantiate(ekePrefab, spawnPos, Quaternion.Euler(0f, 0f, angle));
         ekeObj.GetComponent<EkeProjectile>().Initialize(direction, moveSpeed, rotationSpeed);
     }
 

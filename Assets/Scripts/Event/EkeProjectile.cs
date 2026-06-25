@@ -7,11 +7,14 @@ public class EkeProjectile : MonoBehaviour
     private float moveSpeed;
     private float rotationSpeed;
 
+    private const float lifetime = 6f;
+
     public void Initialize(Vector2 direction, float moveSpeed, float rotationSpeed)
     {
         this.direction = direction.normalized;
         this.moveSpeed = moveSpeed;
         this.rotationSpeed = rotationSpeed;
+        Destroy(gameObject, lifetime);
     }
 
     private void Update()

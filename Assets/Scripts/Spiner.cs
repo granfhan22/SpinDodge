@@ -153,6 +153,7 @@ public class Spin : MonoBehaviour
         dashing = true;
         dashTimer = dashDuration;
         dashDirection = GetMouseDirection();
+        AudioManager.Instance?.PlayDash();
 
         if (visualRenderer != null)
         {
@@ -206,6 +207,7 @@ public class Spin : MonoBehaviour
         if (isDead || isInvincible) return;
 
         currentHealth = Mathf.Max(0, currentHealth - amount);
+        AudioManager.Instance?.PlayPlayerDamage();
 
         if (shakeCoroutine != null) StopCoroutine(shakeCoroutine);
         shakeCoroutine = StartCoroutine(ScreenShake(shakeDuration, shakeMagnitude));
