@@ -3,7 +3,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rockRb;
-    public float throwSpeed { get; private set; } = 2f;
+    public float throwSpeed { get; private set; } = 3f; // thay đổi tốc độ RUM RUM 
     private Vector2 direction;
    
     void Awake()
@@ -18,37 +18,42 @@ public class Bullet : MonoBehaviour
     void FixedUpdate()
     {
         rockRb.linearVelocity = direction * throwSpeed;
+        // Tính toán góc quay của dao dựa trên hướng đi
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle - 90);
     }
     private void OnBecameInvisible()
     {
         gameObject.SetActive(false);
-    } // Kiểm tra nếu object ra khỏi màn hình sẽ tự động trả về Pool.
+    }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    // private void OnCollisionEnter2D(Collision2D collision)
+    // {
+    //     if (collision.gameObject.CompareTag("Player"))
+    //     {
+    //         Spin playerSpin = collision.gameObject.GetComponent<Spin>();
+    //         if (playerSpin != null) playerSpin.ApplyDamage();
+    //         gameObject.SetActive(false);
+    //     }
+    //     else if (collision.gameObject.CompareTag("Bounder"))
+    //     {
+    //         gameObject.SetActive(false);
+    //     }
+    // }
+
+    
+    // Dùng OnTriggerEnter để xuyên qua các self.
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-<<<<<<< Updated upstream
-        if(collision.gameObject.CompareTag("Player"))
-=======
         if (collision.gameObject.CompareTag("Player"))
         {
             Spin playerSpin = collision.gameObject.GetComponent<Spin>();
             if (playerSpin != null) playerSpin.ApplyDamage();
-            AudioManager.Instance?.PlayBulletHit();
             gameObject.SetActive(false);
         }
         else if (collision.gameObject.CompareTag("Bounder"))
->>>>>>> Stashed changes
         {
             gameObject.SetActive(false);
         }
     }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if(collision.gameObject.CompareTag("Bounder"))
-        {
-            gameObject.SetActive(false);
-        }
-    }
-
-
 }

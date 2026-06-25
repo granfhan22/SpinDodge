@@ -28,7 +28,6 @@ public class BulletPool : MonoBehaviour
             tmp = Instantiate(bulletPrefab);
             tmp.SetActive(false);
             pool.Add(tmp);
-
         }
     }
 

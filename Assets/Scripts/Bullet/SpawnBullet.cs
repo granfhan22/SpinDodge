@@ -1,16 +1,19 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnBullet : MonoBehaviour
 {
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private Transform playerPosition;
+    [SerializeField] private Transform playerPosition; 
     [Header("Camera bound property")]
     [SerializeField] private float topBound, bottomBound, leftBound, rightBound;
 
     [Header("Batch settings")]
-    [SerializeField] private int batchSize = 10;
-    [SerializeField] private float spawnIntervalSeconds = 3f;
+    [SerializeField] private int batchSize = 20; // Change to 20 prefab spawn 
+    [SerializeField] private float spawnIntervalSeconds = 2f; // Đổi sang 2s cho nhanh
+
+    [Header("Bounder safety")]
+    [SerializeField] private float spawnMargin = 0.4f;
 
     private void Start()
     {
@@ -32,7 +35,22 @@ public class SpawnBullet : MonoBehaviour
         topBound = height;
         bottomBound = -height;
 
+        ClampBoundsInsideBounder();
+
         StartCoroutine(SpawnInterval());
+    }
+
+    // Tỉ lệ khung hình camera có thể khiến vùng spawn theo orthographicSize/aspect
+    // vượt ra ngoài (hoặc đè lên) tường Bounder cố định trong scene, làm đạn vừa
+    // spawn đã chạm tường và bị tắt ngay. Kẹp lại theo biên trong thực tế của tường.
+    private void ClampBoundsInsideBounder()
+    {
+        Bounds inner = BounderArea.GetInnerBounds(Camera.main);
+
+        leftBound = Mathf.Max(leftBound, inner.min.x + spawnMargin);
+        rightBound = Mathf.Min(rightBound, inner.max.x - spawnMargin);
+        topBound = Mathf.Min(topBound, inner.max.y - spawnMargin);
+        bottomBound = Mathf.Max(bottomBound, inner.min.y + spawnMargin);
     }
 
     private IEnumerator SpawnInterval()
