@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -72,6 +73,16 @@ public class GameManage : MonoBehaviour
         isPaused = true;
         Time.timeScale = 0f;
         if (pausePanel != null) pausePanel.SetActive(true);
+        SyncAudioUI();
+    }
+
+    private void SyncAudioUI()
+    {
+        if (AudioManager.Instance == null) return;
+        if (musicSlider != null) musicSlider.SetValueWithoutNotify(AudioManager.Instance.MusicVolume);
+        if (sfxSlider != null) sfxSlider.SetValueWithoutNotify(AudioManager.Instance.SFXVolume);
+        if (musicToggle != null) musicToggle.SetIsOnWithoutNotify(!AudioManager.Instance.IsMusicMuted);
+        if (sfxToggle != null) sfxToggle.SetIsOnWithoutNotify(!AudioManager.Instance.IsSFXMuted);
     }
 
     public void Resume()
@@ -97,20 +108,27 @@ public class GameManage : MonoBehaviour
         Time.timeScale = 0f;
     }
 
+    private const float ClickDelay = 0.1f;
+
     // Hooked to the "Try Again" button's OnClick in the Inspector.
     public void TryAgain()
     {
         AudioManager.Instance?.PlayButtonClick();
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        StartCoroutine(LoadSceneDelayed(SceneManager.GetActiveScene().name, true));
     }
 
     // Hooked to the "Home" button's OnClick in the Inspector.
     public void Home()
     {
         AudioManager.Instance?.PlayButtonClick();
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(mainMenuSceneName);
+        StartCoroutine(LoadSceneDelayed(mainMenuSceneName, true));
+    }
+
+    private IEnumerator LoadSceneDelayed(string sceneName, bool resetTimeScale = false)
+    {
+        yield return new WaitForSecondsRealtime(ClickDelay);
+        if (resetTimeScale) Time.timeScale = 1f;
+        SceneManager.LoadScene(sceneName);
     }
 
     private static string FormatTime(float seconds)

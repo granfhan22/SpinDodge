@@ -21,6 +21,16 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip gameOverClip;
     [SerializeField] private AudioClip buttonClickClip;
 
+    private const string KeyMusicVolume = "MusicVolume";
+    private const string KeySFXVolume = "SFXVolume";
+    private const string KeyMusicMute = "MusicMute";
+    private const string KeySFXMute = "SFXMute";
+
+    public float MusicVolume => musicSource != null ? musicSource.volume : 1f;
+    public float SFXVolume => sfxSource != null ? sfxSource.volume : 1f;
+    public bool IsMusicMuted => musicSource != null && musicSource.mute;
+    public bool IsSFXMuted => sfxSource != null && sfxSource.mute;
+
     private void Awake()
     {
         Instance = this;
@@ -28,7 +38,19 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
+        LoadAudioSettings();
         PlayMusic(bgMusic);
+    }
+
+    private void LoadAudioSettings()
+    {
+        float musicVol = PlayerPrefs.GetFloat(KeyMusicVolume, 1f);
+        float sfxVol = PlayerPrefs.GetFloat(KeySFXVolume, 1f);
+        bool musicMute = PlayerPrefs.GetInt(KeyMusicMute, 0) == 1;
+        bool sfxMute = PlayerPrefs.GetInt(KeySFXMute, 0) == 1;
+
+        if (musicSource != null) { musicSource.volume = musicVol; musicSource.mute = musicMute; }
+        if (sfxSource != null) { sfxSource.volume = sfxVol; sfxSource.mute = sfxMute; }
     }
 
     public void PlayMusic(AudioClip clip)
@@ -56,20 +78,28 @@ public class AudioManager : MonoBehaviour
     public void SetMusicVolume(float volume)
     {
         if (musicSource != null) musicSource.volume = volume;
+        PlayerPrefs.SetFloat(KeyMusicVolume, volume);
+        PlayerPrefs.Save();
     }
 
     public void SetSFXVolume(float volume)
     {
         if (sfxSource != null) sfxSource.volume = volume;
+        PlayerPrefs.SetFloat(KeySFXVolume, volume);
+        PlayerPrefs.Save();
     }
 
     public void SetMusicMute(bool muted)
     {
         if (musicSource != null) musicSource.mute = muted;
+        PlayerPrefs.SetInt(KeyMusicMute, muted ? 1 : 0);
+        PlayerPrefs.Save();
     }
 
     public void SetSFXMute(bool muted)
     {
         if (sfxSource != null) sfxSource.mute = muted;
+        PlayerPrefs.SetInt(KeySFXMute, muted ? 1 : 0);
+        PlayerPrefs.Save();
     }
 }

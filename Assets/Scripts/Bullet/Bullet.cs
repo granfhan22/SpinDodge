@@ -48,8 +48,8 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Spin playerSpin = collision.gameObject.GetComponent<Spin>();
-            if (playerSpin != null) playerSpin.ApplyDamage();
-            gameObject.SetActive(false);
+            if (playerSpin != null && playerSpin.ApplyDamage())
+                gameObject.SetActive(false);
         }
         else if (collision.gameObject.CompareTag("Bounder"))
         {

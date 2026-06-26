@@ -10,29 +10,31 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - BetterUi
   - Water
   - UI
-  -
-  -
-  - Player
-  - Bullet
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -40,18 +42,6 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Map
-    uniqueID: 571071717
-    locked: 0
-  - name: Player
-    uniqueID: 943934567
-    locked: 0
-  - name: Bullet
-    uniqueID: 26385771
-    locked: 0
-  - name: Event
-    uniqueID: 464631387
     locked: 0
   m_RenderingLayers:
   - Default

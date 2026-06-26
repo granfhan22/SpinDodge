@@ -19,10 +19,8 @@ public class Spin : MonoBehaviour
     public float idleDeceleration ;
 
     [Header("Skill")]
-    public float dashSpeed ;
-    public float dashDuration;
     public float skillCooldown;
-    public float fadeAmount ;
+    public float fadeAmount;
 
     [Header("Health")]
     public int maxHealth ;
@@ -36,6 +34,9 @@ public class Spin : MonoBehaviour
     public float deathShakeDuration = 0.6f;
     public float deathShakeMagnitude = 0.6f;
 
+    [Header("Spinner Selection")]
+    [SerializeField] private SpinnerData[] spinnerDataList;
+
     [Header("Invincibility")]
     public float invincibilityDuration = 2f;
     public float invincibilityBlinkInterval = 0.1f;
@@ -43,14 +44,14 @@ public class Spin : MonoBehaviour
     protected Vector2 direction = Vector2.right; 
     protected float speedRatio;
 
-    bool dashing;
-    float dashTimer;
-    Vector3 dashDirection;
-
     bool skillReady = true;
     float cooldownTimer;
     Color originalColor;
     Color fadedColor;
+
+    SpinnerData currentData;
+    GameObject shieldObject;
+    [SerializeField] private GameObject shieldPrefab;
 
     protected int currentHealth;
     protected bool isDead;
@@ -65,6 +66,9 @@ public class Spin : MonoBehaviour
     {
         visualRenderer = GetComponent<SpriteRenderer>();
         bulletLayer = LayerMask.NameToLayer("Bullet");
+
+        ApplySpinnerData();
+        SetupShieldIfNeeded();
 
         if (visualRenderer != null)
         {
@@ -90,8 +94,43 @@ public class Spin : MonoBehaviour
         if (skillReady && Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
             UseSkill();
 
-        HandleDash();
         HandleSkillCooldown();
+    }
+
+    private void ApplySpinnerData()
+    {
+        if (spinnerDataList == null || spinnerDataList.Length == 0) return;
+        int index = Mathf.Clamp(SpinnerSelection.SelectedIndex, 0, spinnerDataList.Length - 1);
+        SpinnerData d = spinnerDataList[index];
+        if (d == null) return;
+
+        currentData = d;
+        minSpinSpeed = d.minSpinSpeed;
+        maxSpinSpeed = d.maxSpinSpeed;
+        minMoveSpeed = d.minMoveSpeed;
+        maxMoveSpeed = d.maxMoveSpeed;
+        acceleration = d.acceleration;
+        deceleration = d.deceleration;
+        reverseThreshold = d.reverseThreshold;
+        idleDeceleration = d.idleDeceleration;
+        skillCooldown = d.skillCooldown;
+        fadeAmount = d.fadeAmount;
+        maxHealth = d.maxHealth;
+
+        if (visualRenderer != null)
+        {
+            if (d.icon != null) visualRenderer.sprite = d.icon;
+            visualRenderer.color = Color.white;
+        }
+    }
+
+    private void SetupShieldIfNeeded()
+    {
+        if (currentData == null || currentData.skillType != SkillType.Shield || shieldPrefab == null) return;
+        shieldObject = Instantiate(shieldPrefab, transform);
+        shieldObject.transform.localPosition = Vector3.zero;
+        shieldObject.transform.localScale = Vector3.one * currentData.shieldRadius;
+        shieldObject.SetActive(false);
     }
 
     //MovingInput
@@ -135,8 +174,6 @@ public class Spin : MonoBehaviour
 
         speedRatio = Mathf.Clamp01(speedRatio);
 
-        if (dashing) return;
-
         float moveSpeed = Mathf.Lerp(minMoveSpeed, maxMoveSpeed, speedRatio);
         transform.Translate(direction * moveSpeed * Time.deltaTime, Space.World);
     }
@@ -150,17 +187,40 @@ public class Spin : MonoBehaviour
     // Skill button
     protected virtual void UseSkill()
     {
-        dashing = true;
-        dashTimer = dashDuration;
-        dashDirection = GetMouseDirection();
-        AudioManager.Instance?.PlayDash();
-
-        if (visualRenderer != null)
+        switch (currentData?.skillType)
         {
-            skillReady = false;
-            cooldownTimer = skillCooldown;
-            visualRenderer.color = fadedColor;
+            case SkillType.Shield: UseShield();   break;
+            default:               UseTeleport(); break;
         }
+        skillReady = false;
+        cooldownTimer = skillCooldown;
+        if (visualRenderer != null) visualRenderer.color = fadedColor;
+    }
+
+    void UseShield()
+    {
+        if (shieldObject == null) return;
+        shieldObject.SetActive(true);
+        StartCoroutine(ShieldRoutine());
+    }
+
+    IEnumerator ShieldRoutine()
+    {
+        float duration = currentData != null ? currentData.shieldDuration : 2f;
+        yield return new WaitForSecondsRealtime(duration);
+        if (shieldObject != null) shieldObject.SetActive(false);
+    }
+
+    void UseTeleport()
+    {
+        float range = currentData != null ? currentData.teleportRange : 5f;
+        Vector3 dir = GetMouseDirection();
+        Vector3 target = transform.position + dir * range;
+
+        Bounds bounds = BounderArea.GetInnerBounds(Camera.main);
+        target.x = Mathf.Clamp(target.x, bounds.min.x, bounds.max.x);
+        target.y = Mathf.Clamp(target.y, bounds.min.y, bounds.max.y);
+        transform.position = target;
     }
 
     void HandleSkillCooldown()
@@ -177,7 +237,6 @@ public class Spin : MonoBehaviour
             skillReady = true;
         }
     }
-    // Dash Logic
     Vector3 GetMouseDirection()
     { 
         Vector3 fallback = new Vector3(direction.x, direction.y, 0f);
@@ -191,20 +250,12 @@ public class Spin : MonoBehaviour
         return toMouse.sqrMagnitude > 0.0001f ? toMouse.normalized : fallback;
     }
 
-    void HandleDash()
-    {
-        if (!dashing) return;
-
-        transform.Translate(dashDirection * dashSpeed * Time.deltaTime, Space.World);
-        dashTimer -= Time.deltaTime;
-        if (dashTimer <= 0f) dashing = false;
-    }
     // Cho phép đạn/event ngoài (Bullet, EkeProjectile, BoxDropEvent...) gây dame lên player.
-    public void ApplyDamage(int amount = 1) => TakeDamage(amount);
+    public bool ApplyDamage(int amount = 1) => TakeDamage(amount);
 
-    protected virtual void TakeDamage(int amount = 1)
+    protected virtual bool TakeDamage(int amount = 1)
     {
-        if (isDead || isInvincible) return;
+        if (isDead || isInvincible) return false;
 
         currentHealth = Mathf.Max(0, currentHealth - amount);
         AudioManager.Instance?.PlayPlayerDamage();
@@ -216,11 +267,12 @@ public class Spin : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
-            return;
+            return true;
         }
 
         if (invincibilityCoroutine != null) StopCoroutine(invincibilityCoroutine);
         invincibilityCoroutine = StartCoroutine(InvincibilityRoutine());
+        return true;
     }
 
 
@@ -247,7 +299,6 @@ public class Spin : MonoBehaviour
     protected virtual void Die()
     {
         isDead = true;
-        dashing = false;
 
         if (shakeCoroutine != null) StopCoroutine(shakeCoroutine);
         shakeCoroutine = StartCoroutine(DeathSequence());
