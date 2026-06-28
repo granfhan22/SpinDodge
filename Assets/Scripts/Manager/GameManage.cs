@@ -102,7 +102,7 @@ public class GameManage : MonoBehaviour
         if (isGameOver) return;
         isGameOver = true;
 
-        if (resultTimeText != null) resultTimeText.text = "You was spin for\n" + FormatTime(elapsedTime);
+        if (resultTimeText != null) resultTimeText.text = "You were spin for\n" + FormatTime(elapsedTime);
         if (losePanel != null) losePanel.SetActive(true);
         AudioManager.Instance?.PlayGameOver();
         Time.timeScale = 0f;

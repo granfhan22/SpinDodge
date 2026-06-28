@@ -3,7 +3,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rockRb;
-    public float throwSpeed { get; private set; } = 3f; // thay đổi tốc độ RUM RUM 
+    public float throwSpeed { get; private set; } = 2f; // thay đổi tốc độ RUM RUM 
     private Vector2 direction;
    
     void Awake()

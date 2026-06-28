@@ -1,10 +1,58 @@
 fileFormatVersion: 2
-guid: 76336ec478df4924fa9f9d9d7a9254ab
+guid: 39a95cff5987f264b9c288a3262442ca
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5835159998137197743
-    second: ChalkBullet_0
+      213: -2521409195606705084
+    second: Tutorial_0
+  - first:
+      213: 6875079111340007291
+    second: Tutorial_1
+  - first:
+      213: 8746059415684039367
+    second: Tutorial_2
+  - first:
+      213: 4165041436626036476
+    second: Tutorial_3
+  - first:
+      213: 3422399714171777717
+    second: Tutorial_4
+  - first:
+      213: 6718306707676705251
+    second: Tutorial_5
+  - first:
+      213: -2599143105346636691
+    second: Tutorial_6
+  - first:
+      213: -4191322583509088375
+    second: Tutorial_7
+  - first:
+      213: -3790966502919606100
+    second: Tutorial_8
+  - first:
+      213: -7537239731214296419
+    second: Tutorial_9
+  - first:
+      213: -854253366884684044
+    second: Tutorial_10
+  - first:
+      213: 3910068832165871416
+    second: Tutorial_11
+  - first:
+      213: 3635365891621732145
+    second: Tutorial_12
+  - first:
+      213: 4128806777136391499
+    second: Tutorial_13
+  - first:
+      213: -2214099604904780696
+    second: Tutorial_14
+  - first:
+      213: 5003259399734257001
+    second: Tutorial_15
+  - first:
+      213: -5336069616099187000
+    second: Tutorial_16
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -75,7 +123,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -139,23 +187,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ChalkBullet_0
+      name: Tutorial_0
       rect:
         serializedVersion: 2
-        x: 225
-        y: 33
-        width: 50
-        height: 234
+        x: 194
+        y: 193
+        width: 939
+        height: 304
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fa469803a17aaf050800000000000000
-      internalID: 5835159998137197743
+      spriteID: 44c757212b7220dd0800000000000000
+      internalID: -2521409195606705084
       vertices: []
       indices: 
       edges: []
@@ -164,7 +212,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: f68e45196d74d2549874287000e725d8
     internalID: 0
     vertices: []
     indices: 
@@ -174,7 +222,23 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ChalkBullet_0: 5835159998137197743
+      Tutorial_0: -2521409195606705084
+      Tutorial_1: 6875079111340007291
+      Tutorial_10: -854253366884684044
+      Tutorial_11: 3910068832165871416
+      Tutorial_12: 3635365891621732145
+      Tutorial_13: 4128806777136391499
+      Tutorial_14: -2214099604904780696
+      Tutorial_15: 5003259399734257001
+      Tutorial_16: -5336069616099187000
+      Tutorial_2: 8746059415684039367
+      Tutorial_3: 4165041436626036476
+      Tutorial_4: 3422399714171777717
+      Tutorial_5: 6718306707676705251
+      Tutorial_6: -2599143105346636691
+      Tutorial_7: -4191322583509088375
+      Tutorial_8: -3790966502919606100
+      Tutorial_9: -7537239731214296419
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

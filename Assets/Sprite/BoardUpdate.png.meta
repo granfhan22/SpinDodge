@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 76336ec478df4924fa9f9d9d7a9254ab
+guid: 0fcd4f4e335883044aeb9572e83ea7bd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5835159998137197743
-    second: ChalkBullet_0
+      213: -1838499021487237997
+    second: BoardUpdate_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -139,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ChalkBullet_0
+      name: BoardUpdate_0
       rect:
         serializedVersion: 2
-        x: 225
-        y: 33
-        width: 50
-        height: 234
+        x: 74
+        y: 39
+        width: 1174
+        height: 622
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fa469803a17aaf050800000000000000
-      internalID: 5835159998137197743
+      spriteID: 394995871e65c76e0800000000000000
+      internalID: -1838499021487237997
       vertices: []
       indices: 
       edges: []
@@ -174,7 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ChalkBullet_0: 5835159998137197743
+      BoardUpdate_0: -1838499021487237997
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

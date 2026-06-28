@@ -15,19 +15,20 @@ MonoBehaviour:
   spinnerName: BlueSpiner
   icon: {fileID: -1058351059814979363, guid: cb18d5059500ea043a21c7b979ebc7a1, type: 3}
   tint: {r: 1, g: 1, b: 1, a: 1}
-  description: Instantly blink toward your cursor within a limited range .
+  description: Using magical energy to teleport you a short distance toward your
+    mouse cursor.
   skillType: 1
   minSpinSpeed: 90
   maxSpinSpeed: 720
-  minMoveSpeed: 2
+  minMoveSpeed: 0
   maxMoveSpeed: 8
-  acceleration: 0.8
-  deceleration: 1.2
-  reverseThreshold: 0.05
-  idleDeceleration: 0.5
-  skillCooldown: 3
-  fadeAmount: 0.5
+  acceleration: 5
+  deceleration: 2
+  reverseThreshold: 2
+  idleDeceleration: 2
+  skillCooldown: 8
+  fadeAmount: 9
   shieldDuration: 2
   shieldRadius: 1.2
   teleportRange: 3
-  maxHealth: 5
+  maxHealth: 3

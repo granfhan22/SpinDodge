@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// "Ê ke" bay thẳng theo hướng đã được báo trước (warning), vừa bay vừa xoay quanh trục Z.
+
 public class EkeProjectile : MonoBehaviour
 {
     private Vector2 direction;
@@ -28,13 +28,12 @@ public class EkeProjectile : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            Spin playerSpin = collision.gameObject.GetComponent<Spin>();
-            if (playerSpin != null) playerSpin.ApplyDamage();
-            Destroy(gameObject);
+            Spin playerSpin = other.GetComponent<Spin>();
+            playerSpin?.ApplyDamage();
         }
     }
 }

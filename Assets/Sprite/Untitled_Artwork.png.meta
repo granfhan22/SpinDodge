@@ -1,10 +1,25 @@
 fileFormatVersion: 2
-guid: 76336ec478df4924fa9f9d9d7a9254ab
+guid: 5bb103f9ed848d7488ecddf522abcb5e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5835159998137197743
-    second: ChalkBullet_0
+      213: 1302723820812287101
+    second: Untitled_Artwork_0
+  - first:
+      213: 6146782616825927046
+    second: Untitled_Artwork_1
+  - first:
+      213: -5733780330723738835
+    second: Untitled_Artwork_2
+  - first:
+      213: 3766885766661273901
+    second: Untitled_Artwork_3
+  - first:
+      213: 6561064905138155286
+    second: Untitled_Artwork_4
+  - first:
+      213: -5488554388451229797
+    second: Untitled_Artwork_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -75,7 +90,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -139,23 +154,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ChalkBullet_0
+      name: Untitled_Artwork_0
       rect:
         serializedVersion: 2
-        x: 225
-        y: 33
-        width: 50
-        height: 234
+        x: 108
+        y: 305
+        width: 1367
+        height: 281
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fa469803a17aaf050800000000000000
-      internalID: 5835159998137197743
+      spriteID: d7cb4f3b964341210800000000000000
+      internalID: 1302723820812287101
       vertices: []
       indices: 
       edges: []
@@ -164,7 +179,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: e1b72ea3f931d22408e7f2bd0347ea01
     internalID: 0
     vertices: []
     indices: 
@@ -174,7 +189,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ChalkBullet_0: 5835159998137197743
+      Untitled_Artwork_0: 1302723820812287101
+      Untitled_Artwork_1: 6146782616825927046
+      Untitled_Artwork_2: -5733780330723738835
+      Untitled_Artwork_3: 3766885766661273901
+      Untitled_Artwork_4: 6561064905138155286
+      Untitled_Artwork_5: -5488554388451229797
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

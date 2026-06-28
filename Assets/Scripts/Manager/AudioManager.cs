@@ -12,6 +12,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip bgMusic;
 
     [Header("SFX")]
+    [SerializeField] private AudioClip shieldSkillClip;
+    [SerializeField] private AudioClip bulletDestroyClip;
+    [SerializeField] private AudioClip blinkSkillClip;
     [SerializeField] private AudioClip bulletHitClip;
     [SerializeField] private AudioClip playerDamageClip;
     [SerializeField] private AudioClip dashClip;
@@ -66,7 +69,9 @@ public class AudioManager : MonoBehaviour
         if (clip == null || sfxSource == null) return;
         sfxSource.PlayOneShot(clip, volume);
     }
-
+    public void ShieldSkill() => PlaySFX(shieldSkillClip);
+    public void BlinkSkill() => PlaySFX(blinkSkillClip);
+    public void PlayBulletDestroy() => PlaySFX(bulletDestroyClip);
     public void PlayBulletHit() => PlaySFX(bulletHitClip);
     public void PlayPlayerDamage() => PlaySFX(playerDamageClip);
     public void PlayDash() => PlaySFX(dashClip);

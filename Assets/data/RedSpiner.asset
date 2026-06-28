@@ -15,19 +15,19 @@ MonoBehaviour:
   spinnerName: RedSpiner
   icon: {fileID: 1330588204551960968, guid: cb18d5059500ea043a21c7b979ebc7a1, type: 3}
   tint: {r: 1, g: 1, b: 1, a: 1}
-  description: Activate a red shield for 2 seconds that destroys any bullet on contact.
+  description: Use fire energy to destroy all the pieces of chalk around you.
   skillType: 0
   minSpinSpeed: 90
   maxSpinSpeed: 720
-  minMoveSpeed: 2
-  maxMoveSpeed: 8
-  acceleration: 0.8
-  deceleration: 1.2
-  reverseThreshold: 0.05
-  idleDeceleration: 0.5
-  skillCooldown: 3
-  fadeAmount: 0.5
+  minMoveSpeed: 0
+  maxMoveSpeed: 5
+  acceleration: 8
+  deceleration: 2
+  reverseThreshold: 2
+  idleDeceleration: 2
+  skillCooldown: 8
+  fadeAmount: 9
   shieldDuration: 2
   shieldRadius: 2
   teleportRange: 0
-  maxHealth: 5
+  maxHealth: 3

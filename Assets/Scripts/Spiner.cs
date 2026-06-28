@@ -52,6 +52,7 @@ public class Spin : MonoBehaviour
     SpinnerData currentData;
     GameObject shieldObject;
     [SerializeField] private GameObject shieldPrefab;
+    bool isTeleportInvincible;
 
     protected int currentHealth;
     protected bool isDead;
@@ -199,6 +200,7 @@ public class Spin : MonoBehaviour
 
     void UseShield()
     {
+        AudioManager.Instance?.ShieldSkill();
         if (shieldObject == null) return;
         shieldObject.SetActive(true);
         StartCoroutine(ShieldRoutine());
@@ -213,6 +215,7 @@ public class Spin : MonoBehaviour
 
     void UseTeleport()
     {
+        AudioManager.Instance?.BlinkSkill();
         float range = currentData != null ? currentData.teleportRange : 5f;
         Vector3 dir = GetMouseDirection();
         Vector3 target = transform.position + dir * range;
@@ -221,6 +224,15 @@ public class Spin : MonoBehaviour
         target.x = Mathf.Clamp(target.x, bounds.min.x, bounds.max.x);
         target.y = Mathf.Clamp(target.y, bounds.min.y, bounds.max.y);
         transform.position = target;
+
+        StartCoroutine(TeleportInvincibilityRoutine());
+    }
+
+    IEnumerator TeleportInvincibilityRoutine()
+    {
+        isTeleportInvincible = true;
+        yield return new WaitForSeconds(0.3f);
+        isTeleportInvincible = false;
     }
 
     void HandleSkillCooldown()
@@ -255,7 +267,7 @@ public class Spin : MonoBehaviour
 
     protected virtual bool TakeDamage(int amount = 1)
     {
-        if (isDead || isInvincible) return false;
+        if (isDead || isInvincible || isTeleportInvincible) return false;
 
         currentHealth = Mathf.Max(0, currentHealth - amount);
         AudioManager.Instance?.PlayPlayerDamage();
